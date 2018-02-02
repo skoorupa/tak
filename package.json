@@ -2,5 +2,13 @@
   "name": "tak",
   "version": "0.1.0",
   "main": "main.js",
-  "devDependencies": {}
+  "devDependencies": {},
+  "engine": {
+    "node": "*",
+    "npm": "*"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "test": "IP=0.0.0.0 PORT=3030 mocha --timeout 5000 tests/*_test.js"
+  }
 }
