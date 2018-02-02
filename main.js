@@ -4,7 +4,7 @@ var fs = require('fs');
 
 http.createServer(function (req, res) {
   var q = url.parse(req.url, true);
-  var filename
+  var filename;
   if (q.pathname) {
     filename = "." + q.pathname;
   } else {
