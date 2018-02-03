@@ -5,12 +5,18 @@
     <title>stronka</title>
   </head>
   <body>
-    ale fajnie <button onclick="tak()"></button>
+    <textarea name="name" rows="8" cols="80" id="textarea" readonly></textarea><br>
+    <input type="text" name="" value="" id="input"><button onclick="wyslij(this.value)" type="button" name="button">wyslij</button>
 
     <script type="text/javascript">
       var connection = new WebSocket('ws://'+window.location.hostname+":8000", ['soap', 'xmpp']);
       connection.onmessage = function (event) {
         console.log(event.data);
+      }
+
+      function wyslij(txt) {
+        connection.send(txt);
+        document.getElementById('textarea').textContent += txt;
       }
     </script>
   </body>
