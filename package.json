@@ -8,7 +8,6 @@
     "npm": "*"
   },
   "scripts": {
-    "install": "npm install --save ws",
     "start": "node main.js"
   },
   "dependencies": {
