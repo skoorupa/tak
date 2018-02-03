@@ -36,11 +36,11 @@ http.createServer(function (req, res) {
     res.write(data);
     return res.end();
   });
-}).listen(process.env.PORT || 8080);
+}).listen(8080);
 
 const WebSocket = require('ws');
 
-const wss = new WebSocket.Server({ port: PORT || 80 });
+const wss = new WebSocket.Server({ port: 80 });
 
 wss.on('connection', function connection(ws) {
   ws.on('message', function incoming(message) {
