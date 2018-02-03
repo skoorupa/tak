@@ -8,9 +8,9 @@
     ale fajnie <button onclick="tak()"></button>
 
     <script type="text/javascript">
-      var fs = require('fs');
-      function tak() {
-        fs.writeFile("test.txt","taktaktak");
+      var connection = new WebSocket('ws://'+window.location.host, ['soap', 'xmpp']);
+      connection.onmessage = function (event) {
+        console.log(event.data);
       }
     </script>
   </body>

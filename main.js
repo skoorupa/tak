@@ -1,17 +1,21 @@
 var http = require('http');
 var url = require('url');
 var fs = require('fs');
+var path = require('path');
 
 http.createServer(function (req, res) {
   var q = url.parse(req.url, true);
   var filename;
   console.log("."+q.pathname);
 
-  var deny = ["/main.js","/package.json","package-lock.json"];
+  var deny = ["/main.js","/package.json","/package-lock.json","node_modules"];
+  var denyfolders = ["node_modules"];
   var doyoudeny = false;
 
+  console.log(q.pathname.split("/")[0]);
+
   deny.forEach(function (item, index) {
-    if (item==q.pathname+"")
+    if (item==q.pathname || item==q.pathname.split("/")[1])
       doyoudeny = true;
   });
 
@@ -36,3 +40,14 @@ http.createServer(function (req, res) {
     return res.end();
   });
 }).listen(8080);
+
+const WebSocket = require('ws');
+
+const wss = new WebSocket.Server({ port: 80 });
+
+wss.on('connection', function connection(ws) {
+  ws.on('message', function incoming(message) {
+    console.log('received: %s', message);
+    ws.send('something');
+  });
+});
