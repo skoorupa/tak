@@ -10,14 +10,11 @@ http.createServer(function (req, res) {
 
   var deny = ["/main.js","/package.json","/package-lock.json","node_modules"];
   var denyfolders = ["node_modules"];
-  var doyoudeny = false;
+  var detectdeny = false;
 
   console.log(q.pathname.split("/")[0]);
 
-  deny.forEach(function (item, index) {
-    if (item==q.pathname || item==q.pathname.split("/")[1])
-      doyoudeny = true;
-  });
+  detectdeny = deny[q.pathname] || deny[q.pathname.split("/")[1]]
 
   if (q.pathname!="/")
     filename = "."+q.pathname;
@@ -25,8 +22,8 @@ http.createServer(function (req, res) {
     filename = "./index.html";
 
   fs.readFile(filename, function(err, data) {
-    if (err || doyoudeny) {
-      if (doyoudeny){
+    if (err || detectdeny) {
+      if (detectdeny){
         console.log("connection denied");
         res.writeHead(403, {'Content-Type': 'text/html'});
         return res.end("403 Forbidden");
@@ -48,6 +45,17 @@ const wss = new WebSocket.Server({ port: 80 });
 wss.on('connection', function connection(ws) {
   ws.on('message', function incoming(message) {
     console.log('received: %s', message);
-    ws.send('something');
+    try {
+      ws.send('something');
+    } catch (e) {
+      console.error(e);
+    }
   });
+  ws.on('error', function(e){
+    console.log(e);
+  });
+});
+
+wss.on('close', function close() {
+  console.log('disconnected');
 });
