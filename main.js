@@ -43,7 +43,7 @@ http.createServer(function (req, res) {
 
 const WebSocket = require('ws');
 
-const wss = new WebSocket.Server({ port: 8000 });
+const wss = new WebSocket.Server("ws://nwm-nodekappa.7e14.starter-us-west-2.openshiftapps.com:8000");
 
 wss.on('connection', function connection(ws) {
   ws.on('message', function incoming(message) {
