@@ -43,24 +43,24 @@ server.on('error', (e) => {
 
 server.listen(8080);
 
-const WebSocket = require('ws');
-
-const wss = new WebSocket.Server({ port: 80 });
-
-wss.on('connection', function connection(ws) {
-  ws.on('message', function incoming(message) {
-    console.log('received: %s', message);
-    try {
-      ws.send('something');
-    } catch (e) {
-      console.error(e);
-    }
-  });
-  ws.on('error', function(e){
-    console.log(e);
-  });
-});
-
-wss.on('close', function close() {
-  console.log('disconnected');
-});
+// const WebSocket = require('ws');
+//
+// const wss = new WebSocket.Server({ port: 80 });
+//
+// wss.on('connection', function connection(ws) {
+//   ws.on('message', function incoming(message) {
+//     console.log('received: %s', message);
+//     try {
+//       ws.send('something');
+//     } catch (e) {
+//       console.error(e);
+//     }
+//   });
+//   ws.on('error', function(e){
+//     console.log(e);
+//   });
+// });
+//
+// wss.on('close', function close() {
+//   console.log('disconnected');
+// });
