@@ -3,7 +3,7 @@ var url = require('url');
 var fs = require('fs');
 var path = require('path');
 
-var server = http.createServer(function (req, res) {
+http.createServer(function (req, res) {
   var q = url.parse(req.url, true);
   var filename;
   console.log("."+q.pathname);
@@ -36,12 +36,7 @@ var server = http.createServer(function (req, res) {
     res.write(data);
     return res.end();
   });
-});
-server.on('error', (e) => {
-  console.error(e);
-});
-
-server.listen(8080);
+}).listen(process.env.PORT || 8080);
 
 // const WebSocket = require('ws');
 //
