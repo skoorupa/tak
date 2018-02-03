@@ -5,6 +5,13 @@
     <title>stronka</title>
   </head>
   <body>
-    ale fajnie
+    ale fajnie <button onclick="tak()"></button>
+
+    <script type="text/javascript">
+      var fs = require('fs');
+      function tak() {
+        fs.writeFile("test.txt","taktaktak");
+      }
+    </script>
   </body>
 </html>
