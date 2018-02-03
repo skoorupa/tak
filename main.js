@@ -3,6 +3,9 @@ var url = require('url');
 var fs = require('fs');
 var path = require('path');
 
+var ipaddress = process.env.OPENSHIFT_NODEJS_IP || "127.0.0.1";
+var port      = process.env.OPENSHIFT_NODEJS_PORT || 8080;
+
 http.createServer(function (req, res) {
   var q = url.parse(req.url, true);
   var filename;
