@@ -10,5 +10,7 @@
   "scripts": {
     "start": "npm start"
   },
-  "dependencies": {}
+  "dependencies": {
+    "ws": "^4.0.0"
+  }
 }
