@@ -10,5 +10,8 @@
   "scripts": {
     "start": "node main.js",
     "test": "IP=0.0.0.0 PORT=3030 mocha --timeout 5000 tests/*_test.js"
+  },
+  "dependencies": {
+    "ws": "^4.0.0"
   }
 }
