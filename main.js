@@ -48,7 +48,7 @@ const WebSocket = require('ws');
 var clients = [];
 var file;
 
-const wss = new WebSocket.Server({ server:http });
+const wss = new WebSocket.Server({ port:8000 });
 
 wss.on('connection', function connection(ws) {
   fs.readFile("chat.txt", function (err, data) {
