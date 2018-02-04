@@ -48,7 +48,7 @@ const WebSocket = require('ws');
 var clients = [];
 var file;
 
-const wss = new WebSocket.Server({ port:8000 });
+const wss = new WebSocket.Server("ws://tak-skorupanodejs.7e14.starter-us-west-2.openshiftapps.com/");
 
 wss.on('connection', function connection(ws) {
   fs.readFile("chat.txt", function (err, data) {
