@@ -11,7 +11,7 @@
     <script type="text/javascript">
       var connection = new WebSocket('ws://'+window.location.hostname+":8000", ['soap', 'xmpp']);
       connection.onmessage = function (event) {
-        console.log(event.data);
+        document.getElementById('textarea').value = event.data;
       }
 
       function wyslij(txt) {

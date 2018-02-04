@@ -42,23 +42,43 @@ http.createServer(function (req, res) {
 }).listen(port);
 
 const WebSocket = require('ws');
+var clients = [];
+var file;
 
-const wss = new WebSocket.Server("ws://nwm-nodekappa.7e14.starter-us-west-2.openshiftapps.com:8000");
+const wss = new WebSocket.Server({ port: 8000 });
 
 wss.on('connection', function connection(ws) {
-  ws.on('message', function incoming(message) {
+  fs.readFile("chat.txt", function (err, data) {
+    file = data + "!!! new guy joined!" + "\n";
+    fs.writeFile("chat.txt", file, function () {
+      ws.send(file);
+    });
+  });
+  clients[clients.length] = ws;
+  clients[clients.length-1].on('message', function incoming(message) {
     console.log('received: %s', message);
     try {
-      ws.send('something');
+      fs.readFile("chat.txt", function (err, data) {
+        file = data + message + "\n";
+        fs.writeFile("chat.txt", file, function () {
+          daj();
+        });
+      });
     } catch (e) {
       console.error(e);
     }
   });
-  ws.on('error', function(e){
-    console.log(e);
+  clients[clients.length-1].on('error', function(e){
+    clients.splice(clients.indexOf(this),1);
   });
 });
 
 wss.on('close', function close() {
   console.log('disconnected');
 });
+
+function daj() {
+  for (var i = 0; i < clients.length; i++) {
+    clients[i].send(file);
+  }
+}
