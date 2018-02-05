@@ -43,6 +43,7 @@ http.createServer(function (req, res) {
     return res.end();
   });
 }).listen(port);
+console.log("listening on port "+port);
 
 const WebSocket = require('ws');
 var clients = [];
